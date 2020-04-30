@@ -59,7 +59,7 @@ sub get_active {
     my %active_leases = ();
     while (<$leases>){
         my $line = $_;
-        if ($line =~ /lease\s(.*)\s{/){
+        if ($line =~ /lease\s(.*)\s\{/){
             $ip = $1;
         }
         next if (!defined($ip));
@@ -99,9 +99,9 @@ sub get_pool_size {
     my %shared_net_hash = ();
     while (<$conf>) {
         my $line = $_;
-        $level++ if ( $line =~ /{/ );
-        $level-- if ( $line =~ /}/ );
-        if ($line =~ /shared-network\s(.*)\s{/) {
+        $level++ if ( $line =~ /\{/ );
+        $level-- if ( $line =~ /\}/ );
+        if ($line =~ /shared-network\s(.*)\s\{/) {
             $shared_net = $1;
         } elsif ($line =~ /range\s(.*?)\s(.*?);/) {
             my $start = iptoint($1);
@@ -168,7 +168,7 @@ sub parse_lease {
     $lease_hash{"state"} = $state;
     
     # Get client IP address
-    my ($ip_address) = $lease =~ /lease \s+ ([\d\.]+) \s+ {/sx;
+    my ($ip_address) = $lease =~ /lease \s+ ([\d\.]+) \s+ \{/sx;
     die("Malformed lease: missing IP address!") unless defined($ip_address);
     $lease_hash{"ip_address"} = $ip_address;
 

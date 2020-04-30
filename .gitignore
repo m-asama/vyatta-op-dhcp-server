@@ -21,6 +21,8 @@ libtool
 /debian/vyatta-op-dhcp-server.postinst
 /debian/vyatta-op-dhcp-server.debhelper.log
 /debian/vyatta-op-dhcp-server.substvars
+/debian/.debhelper/
+/debian/changelog.*
 /INSTALL
 /Makefile.in
 /Makefile
